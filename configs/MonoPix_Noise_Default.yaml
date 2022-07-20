@@ -1,0 +1,39 @@
+seeds: 0
+train: 1
+no_dropout: 1
+name: MonoPix_Noise_Default
+model: cycleCtrl_noise
+dataset_mode: noise_dataset
+which_model_netG: sid_unet_resize_ctrl
+which_model_netD: basic
+Gnorm: Identity
+Dnorm: Identity
+n_layers_D: 3
+patchSize: 128
+skip: 1
+batchSize: 8
+vgg: 0.5
+vgg_choose: relu5_1
+gpu_ids:
+    - 0
+IsRelativeCtrl: 1
+margin: 0.5
+grad_clip: 20
+beta1: 0.5
+display_freq: 1000
+print_freq: 200
+save_epoch_freq: 10
+no_flip: 0
+cal_D_Df: 0  # unilateral translation
+cal_D_Df: 0
+pseudo_best_enlvl: 1
+h5file_path: ""
+vgg_path: ""
+saveD: 0
+niter: 100
+niter_decay: 100
+monoidt: 0
+UseNoise: 1
+lambda_res: 1
+
+

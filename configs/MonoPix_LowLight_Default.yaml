@@ -1,0 +1,47 @@
+seeds: 0
+train: 1
+no_dropout: 1
+name: MonoPix_LowLight_Default
+model: cycleCtrl_lowlight
+dataset_mode: lowlight_dataset
+which_model_netG: sid_unet_resize_ctrl
+which_model_netD: basic
+Gnorm: batch
+Dnorm: Identity
+patchD: 1
+patch_vgg: 1
+patchD_3: 5
+n_layers_D: 5
+n_layers_patchD: 4
+fineSize: 256
+patchSize: 32
+skip: 1
+batchSize: 16
+self_attention: 1
+times_residual: 1
+vgg: 1
+vgg_choose: relu5_1
+gpu_ids:
+    - 0
+IsRelativeCtrl: 1
+margin: 0.33
+cal_D_Df: 0  # unilateral translation
+cal_G_Df: 0
+grad_clip: 20
+beta1: 0.5
+display_freq: 20
+print_freq: 10
+niter: 100
+save_epoch_freq: 5
+niter_decay: 100
+vary: 1
+no_flip: 0
+pseudo_best_enlvl: 1
+source_dataset: ALOL
+target_dataset: B  # Note, it is not BLOL
+resize_or_crop: crop
+saveD: 0
+dataroot: ""
+vgg_path: ""
+out_tanh: 0  # EnlightenGAN does not norm the output.
+

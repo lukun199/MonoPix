@@ -1,0 +1,1 @@
+Download the pretrained checkpoints to reproduce the results. We note that one can also train his own classifier under different settings.
