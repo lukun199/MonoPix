@@ -5,10 +5,19 @@
 **Abstract**
 
 
-Continuous one-to-many mapping is a less investigated yet important task in both low-level visions and neural image translation. In this paper, we present a new formulation called MonoPix, an unsupervised and contrastive continuous modulation model, and take a step further to enable a pixel-level spatial control which is critical but can not be properly handled previously. The key feature of this work is to model the monotonicity between controlling signals and the domain discriminator with a novel contrastive modulation framework and corresponding monotonicity constraints. We have also introduced a selective inference strategy with logarithmic approximation complexity and support fast domain adaptations. The state-of-the-art performance is validated on a variety of continuous mapping tasks, including AFHQ cat-dog and Yosemite summer-winter translation. The introduced approach also helps to provide a new solution for many low-level tasks like low-light enhancement and natural noise generation, which is beyond the long-established practice of one-to-one training and inference.
+> Continuous one-to-many mapping is a less investigated yet important task in both low-level visions and neural image translation. In this paper, we present a new formulation called MonoPix, an unsupervised and contrastive continuous modulation model, and take a step further to enable a pixel-level spatial control which is critical but can not be properly handled previously. The key feature of this work is to model the monotonicity between controlling signals and the domain discriminator with a novel contrastive modulation framework and corresponding monotonicity constraints. We have also introduced a selective inference strategy with logarithmic approximation complexity and support fast domain adaptations. The state-of-the-art performance is validated on a variety of continuous mapping tasks, including AFHQ cat-dog and Yosemite summer-winter translation. The introduced approach also helps to provide a new solution for many low-level tasks like low-light enhancement and natural noise generation, which is beyond the long-established practice of one-to-one training and inference.
 
 
 ![](visualize_demo/teaser.png)
+
+A few representative images. Results produced by MonoPix are shown in the last row.
+
+|Summer-Winter|Cat-Dog|
+|:---:|:---:|
+|S2W: ![](visualize_demo/S2W_0.gif)|C2D: ![](visualize_demo/C2D_0.gif)|
+|S2W: ![](visualize_demo/S2W_1.gif)|C2D: ![](visualize_demo/C2D_1.gif)|
+|W2S: ![](visualize_demo/W2S_0.gif)|D2C: ![](visualize_demo/D2C_0.gif)|
+|W2S: ![](visualize_demo/W2S_1.gif)|D2C: ![](visualize_demo/D2C_1.gif)|
 
 
 **This repository is still under construction. arXiv version will be updated soon.**
@@ -59,11 +68,10 @@ Though we add color loss in SIDD dataset, the generated results still bear certa
 
 ### PreTrained Models
 
-<div class="center">
+
 |Google Drive | Baidu Netdisk|
 |:----:|:----:|
 |[Link](https://drive.google.com/drive/folders/1Q2R7acNNsr8wrMN3ooecOpWxKRE8ym2i?usp=sharing)|[Link](https://pan.baidu.com/s/1-S73BFEsNMoMb4H3uH5Neg) extraction code: `om49`|
-</div>
 
 
 The above checkpoints are placed into `./checkpoints`.
@@ -185,6 +193,10 @@ python Evaluations/test_network_ACC.py \
 
 The weights of our trained ResNet50 backbones for calculating ACC can be downloaded at [Google Drive](https://drive.google.com/drive/folders/1_iZCPa8_D09Y2ZvX3FTaV_gVi6yxSOvS?usp=sharing) or [Baidu Netdisk](https://pan.baidu.com/s/1s5ZfPwKVJZdb2FnsLPx_wQ) (extraction code: `1kvf`). These checkpoints are provided to reporduce the results only. 
 
+
+### Drawbacks:
++ MonoPix currently does not support multi-modal and multi-attribute pixel-level translation.
++ (Maybe not a big problem) Unnatural patterns are produced at high translation intensities.
 
 
 ### Acknowledgments
