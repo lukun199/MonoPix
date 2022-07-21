@@ -212,7 +212,7 @@ class LowLightModel(BaseModel):
         pred_fake = netD.forward(fake.detach())
 
         loss_D_real = self.criterionGAN(pred_real, True)
-        loss_D_fake = self.criterionGAN(pred_fake, False, self.enhance_level)
+        loss_D_fake = self.criterionGAN(pred_fake, False)
         loss_D = (loss_D_real + loss_D_fake) * 0.5
 
         # monotonicity loss
@@ -310,7 +310,7 @@ class LowLightModel(BaseModel):
         """MonoPix adds monotonicity loss"""
 
         pred_fake = self.netD_A.forward(self.fake_B)
-        self.loss_G_A = self.criterionGAN(pred_fake, True, self.enhance_level)
+        self.loss_G_A = self.criterionGAN(pred_fake, True)
         self.loss_monoG_A = self.criterionMono(pred_fake) if self.opt.lambda_mono>0 else 0
 
         # patch Discriminator.

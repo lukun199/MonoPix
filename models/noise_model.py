@@ -323,17 +323,17 @@ class NoiseModel(BaseModel):
         if self.opt.patchD:
             pred_fake_patch = self.netD_PA.forward(self.fake_patch)
             loss_G_A_patch += self.criterionGAN(pred_fake_patch, True)
-            loss_G_A_patch_MONO += self.monoRelativelossA2B(pred_fake_patch)
+            loss_G_A_patch_MONO += self.criterionMono(pred_fake_patch)
         if self.opt.patchD_3 > 0:
             for i in range(self.opt.patchD_3):
                 pred_fake_patch_1 = self.netD_PA.forward(self.fake_patch_1[i])
                 loss_G_A_patch += self.criterionGAN(pred_fake_patch_1, True)
-                loss_G_A_patch_MONO += self.monoRelativelossA2B(pred_fake_patch_1)
+                loss_G_A_patch_MONO += self.criterionMono(pred_fake_patch_1)
 
         if not self.opt.D_P_times2:
             self.loss_G_A_patch = loss_G_A_patch / float(self.opt.patchD_3 + 1)  # avg glob and patch
             self.loss_G_A_patch_MONO = loss_G_A_patch_MONO / float(self.opt.patchD_3 + 1)
-        else:  # 不执行
+        else:
             self.loss_G_A_patch = loss_G_A_patch / float(self.opt.patchD_3 + 1) * 2
             self.loss_G_A_patch_MONO = loss_G_A_patch_MONO / float(self.opt.patchD_3 + 1) * 2
 

@@ -10,7 +10,7 @@
 
 ![](visualize_demo/teaser.png)
 
-A few representative images. Results produced by MonoPix are shown in the last row.
+A few representative images. Results produced by MonoPix are shown in the last column.
 
 |Summer-Winter|Cat-Dog|
 |:---:|:---:|

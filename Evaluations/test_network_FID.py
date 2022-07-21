@@ -91,8 +91,8 @@ std = np.array([0.229, 0.224, 0.225])
 pkl_file_path = os.path.join(os.path.dirname(__file__), 'pkl_feats')
 os.makedirs(pkl_file_path, exist_ok=True)
 
-A_DOMAIN = 'A_SW' if 'S2W' in args.input_path or 'W2S' in args.input_path or 'SW' in args.input_path else 'ACat'
-B_DOMAIN = 'B_SW' if 'S2W' in args.input_path or 'W2S' in args.input_path or 'SW' in args.input_path else 'BDog'
+A_DOMAIN = 'A_Winter' if 'S2W' in args.input_path or 'W2S' in args.input_path or 'SW' in args.input_path else 'A_Cat'
+B_DOMAIN = 'B_Summer' if 'S2W' in args.input_path or 'W2S' in args.input_path or 'SW' in args.input_path else 'B_Dog'
 
 pkl_file_name = os.path.join(pkl_file_path, 'feats_{}_startlvl_{}_{}.pkl'.format(style, args.start_lvl,
                                                                          'wholetraj' if WholeTraj else ''))

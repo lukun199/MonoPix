@@ -84,8 +84,8 @@ from PIL import Image
 import random
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--A_path', type=str, default='trainA_SW')  # Winter/Cat
-parser.add_argument('--B_path', type=str, default='trainB_SW')  # Summer/Dog
+parser.add_argument('--A_path', type=str, default='trainA_Winter')  # Winter/Cat
+parser.add_argument('--B_path', type=str, default='trainB_Summer')  # Summer/Dog
 parser.add_argument('--A_path_test', type=str, default='testA_SW')
 parser.add_argument('--B_path_test', type=str, default='testB_SW')
 parser.add_argument('--device', type=str, default='cuda:1')

@@ -64,14 +64,14 @@ class CycleGANCtrlModel(BaseModel):
         if self.isTrain:
             self.old_lr = opt.lr
 
-            # note. this is slightly different from the paper.
+            # Note. this following codes on ImagePool may be confusing for some readers.
             # in original CycleGAN paper, image pool is used to make G and D irrelevant to the same training batch
             # In MonoPix, we tried to modify ImagePool to make two contrastive sample come together (ImagePool_Mono)
             # However, sometimes using `ImagePool_Mono` makes discriminator too strong and increase the instability
-            # So we keep using the original ImagePool.
-            # On the one hand, it makes training G and D irrelevant,
+            # So we keep using the original ImagePool, considering the following reasons:
+            # On one hand, it makes training G and D irrelevant,
             # on the other hand, it confuses the discriminator when calculating monotonicity loss
-            # In EnligtenGAN, the authors do not use image pool.
+            # In EnligtenGAN, the authors do not use image pool. We follow their settings on LowLight enhancement
             if not self.opt.IP_MONO:
                 self.fake_A_pool = ImagePool(opt.pool_size)
                 self.fake_B_pool = ImagePool(opt.pool_size)
