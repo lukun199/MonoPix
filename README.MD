@@ -13,30 +13,36 @@ Continuous one-to-many mapping is a less investigated yet important task in both
 
 **This repository is still under construction. arXiv version will be updated soon.**
 
+### Requirements
+
+```
+pip install -r requirements.txt
+```
 
 ### Dataset Preparation
 
-Download Yosemite, AFHQ and LOL (along with EnglightenGAN) dataset, then split the training images into two domains.
+Download Yosemite (from [CycleGAN](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)), AFHQ (from [StarGANv2](https://github.com/clovaai/stargan-v2)) and [LOL](https://daooshee.github.io/BMVC2018website/) (along with [EnlightenGAN](https://github.com/VITA-Group/EnlightenGAN)) dataset, then split the training images into two domains.
+
 
 ```
 .
 ├── DATA_ROOT
-│   └── trainA
+│   └── trainA_Domain
 │           ├── IMAGE 1
 │           └── IMAGE 2 ...
-│   └── trainB
+│   └── trainB_Domain
 │           ├── IMAGE 1
 │           └── ...
 ```
 
-In our experiments, we have the following folders: `trainA_SW` (winter), `trainB_SW` (Summer), `trainACat` (Cat) `trainBDog` (Dog), `trainA_LOL` (low-light images from LOL) and `trainB` (high-light images from EnlightenGAN). You may also need to download pretrained VGG weights following instructions in [EnlightenGAN](https://github.com/VITA-Group/EnlightenGAN). 
+In our experiments, we have the following folders: `trainA_Winter`, `trainB_Summer` (we use Winter as domain A, this is not a must), `trainA_Cat`, `trainB_Dog`, `trainA_LOL` (low-light images from LOL) and `trainB_LOL` (normal light images from EnlightenGAN, not normal images from LOL dataset). You may also need to download pretrained VGG weights following instructions in [EnlightenGAN](https://github.com/VITA-Group/EnlightenGAN). 
 
-For SIDD noise generation task, we follow [DANet's](https://github.com/zsyOAOA/DANet) steps to prepare the dataset (into `.hdf5` files). SIDD images are not required to be palced in `$DATA_ROOT`; instead it is specified by the option `--h5file_path`.
+For SIDD noise generation task, we follow [DANet's](https://github.com/zsyOAOA/DANet) steps to prepare the dataset (into `.hdf5` files). SIDD images are not required to be placed in `$DATA_ROOT`; instead it is specified by the option `--h5file_path`.
 
 
 ### Training
 
-You need to specify the dataset (may be also VGG model) directory before running the following codes.
+You need to specify the dataset (maybe also VGG model) directory before running the following codes.
 
 ```
 python train.py --config configs/MonoPix_SummerWinter_Default.yaml
@@ -47,19 +53,22 @@ python train.py --config configs/MonoPix_Noise_Default.yaml
 
 In Summer-Winter (Yosemite) and Cat-Dog (AFHQ) tasks, we implement a bi-directional translation, while for Lowlight (LOL) and Noise (SIDD), we only train one generator and one discriminator for uni-directional modulation. MonoPix is now implemented with CycleGAN framework, and performs better on style modulations, but is not typically designed for shape translation (which may get improved when integrated with a StarGAN framework).
 
-Though we add color loss in SIDD dataset, the generated results still bears certain color shift. We perform an early stop on this task. Actually you can observe the continuous modulation process in `visualize` folder after a few training epoches.
+Though we add color loss in SIDD dataset, the generated results still bear certain color shift. We perform an early stop on this task. Actually you can observe the continuous modulation process in `visualize` folder after a few training epochs.
 
 
 
 ### PreTrained Models
 
+<div class="center">
 |Google Drive | Baidu Netdisk|
 |:----:|:----:|
-|Link|[Link](https://pan.baidu.com/s/1-S73BFEsNMoMb4H3uH5Neg) extraction code: `om49`|
+|[Link](https://drive.google.com/drive/folders/1Q2R7acNNsr8wrMN3ooecOpWxKRE8ym2i?usp=sharing)|[Link](https://pan.baidu.com/s/1-S73BFEsNMoMb4H3uH5Neg) extraction code: `om49`|
+</div>
+
 
 The above checkpoints are placed into `./checkpoints`.
 
-Note that for better readibility, we integrated the training codes for all four tasks. As a result, all the normalization layers occurred in the pretrained models (i.e., `BN`, `IN`, and `Identity`) are named as `norm` in the integrated code. You do not need to manually deal with this, as we have already renamed all norm layers when loading the pretrained checkpoints. (see `BaseModel.load_network`)
+Note that for better readability, we integrated the training codes for all four tasks. As a result, all the normalization layers occurred in the pretrained models (i.e., `BN`, `IN`, and `Identity`) are named as `norm` in the integrated code. You do not need to manually deal with this, as we have already renamed all norm layers when loading the pretrained checkpoints. (see `BaseModel.load_network`)
 
 
 
@@ -110,7 +119,7 @@ python predict.py --config configs/MonoPix_Noise_Default.yaml \
 
 ### Spatial control examples
 
-We provide a few exampels of spatial control, where one can customize the pixel-level translation intensities. The following codes reproduces the results reported in the main paper and supplementary material.
+We provide a few examples of spatial control, where one can customize the pixel-level translation intensities. The following codes reproduce the results reported in the main paper and supplementary material.
 
 ```
 python -m Spatical_Control_Example.Demo_Season_SpatialControl
@@ -133,8 +142,8 @@ First you need to generate the whole translation trajectory as described above.
 
 The generated folder has the following structure:
 ```
-.
-├── EXP_PATH
+./results
+├── EXP_NAME
 │   └── IMAGE_NAME1
 │           ├── IMAGE_NAME1_enhlvl_00.png
 │           ├── IMAGE_NAME1_enhlvl_01.png
@@ -174,11 +183,11 @@ python Evaluations/test_network_ACC.py \
 		--ckpt_loadpath $ACC_CKPTS
 ```
 
-The weights of our trained ResNet50 backbones for calcualting ACC can be downloaded at Google Drive or [Baidu Netdisk](https://pan.baidu.com/s/1s5ZfPwKVJZdb2FnsLPx_wQ) (extraction code: `1kvf`). These checkpoints are provided to reporduce the results only. 
+The weights of our trained ResNet50 backbones for calculating ACC can be downloaded at [Google Drive](https://drive.google.com/drive/folders/1_iZCPa8_D09Y2ZvX3FTaV_gVi6yxSOvS?usp=sharing) or [Baidu Netdisk](https://pan.baidu.com/s/1s5ZfPwKVJZdb2FnsLPx_wQ) (extraction code: `1kvf`). These checkpoints are provided to reporduce the results only. 
 
 
 
-### Acknlwlegdements
+### Acknowledgments
 
 Our codes are built on the following repositories: 
 

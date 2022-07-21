@@ -37,8 +37,8 @@ niter_decay: 100
 vary: 1
 no_flip: 0
 pseudo_best_enlvl: 1
-source_dataset: ALOL
-target_dataset: B  # Note, it is not BLOL
+source_dataset: A_LOL
+target_dataset: B_LOL
 resize_or_crop: crop
 saveD: 0
 dataroot: ""

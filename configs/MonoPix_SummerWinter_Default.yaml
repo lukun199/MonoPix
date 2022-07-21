@@ -23,8 +23,8 @@ print_freq: 40
 save_epoch_freq: 10
 no_flip: 0
 pseudo_best_enlvl: 1
-source_dataset: A_SW
-target_dataset: B_SW
+source_dataset: A_Winter
+target_dataset: B_Summer
 saveD: 0
 niter: 200
 niter_decay: 100

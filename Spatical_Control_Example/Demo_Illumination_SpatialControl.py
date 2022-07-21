@@ -9,7 +9,7 @@ import numpy as np
 
 opt = TrainOptions().parse()
 
-config_path = 'configs/MonoPix_LowLight_Default.yaml' # Cyc_CatDog_UnetTanh_BasicD_NoNormG_IPBug_CYC-133
+config_path = 'configs/MonoPix_LowLight_Default.yaml'
 
 print('loading from config')
 f = yaml.safe_load(open(config_path, 'r'))
@@ -25,7 +25,7 @@ setattr(opt, 'debug', 1)
 setattr(opt, 'gpu_ids', [0])
 setattr(opt, 'isTrain', 0)
 setattr(opt, 'vis_IN', 0)
-setattr(opt, 'pretrained_path', './checkpoints/' + config_path[:-4])  # './ckpt_Ctrl_PreT/Reweight_G' './checkpoints/CEG_LOLS_VGG1_FT_FewShot'
+setattr(opt, 'pretrained_path', './checkpoints/' + config_path[:-4])
 print('--------args----------')
 for k in list(sorted(vars(opt).keys())):
     print('%s: %s' % (k, vars(opt)[k]))
@@ -40,7 +40,7 @@ def init_seeds(seed=0, cuda_deterministic=False):
 init_seeds(opt.seeds)
 
 # save to the disk
-name = 'LL_Multiple'  #  SummWint CatDog  Gender
+name = 'LL_Multiple'
 os.makedirs('./visualize_demo/'+name, exist_ok=True)
 model = create_model(opt)
 
@@ -93,8 +93,6 @@ model.pred_special_single(*inp_, onevariable=False, name='LOL_amsked')
 
 
 
-# TEST OK
-# SIDD EVAL SPATIAL
 img_name = './Spatical_Control_Example/low10461.png'
 img = io.imread(img_name)
 # img =img.

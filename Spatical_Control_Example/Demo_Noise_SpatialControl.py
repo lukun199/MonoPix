@@ -25,7 +25,7 @@ setattr(opt, 'debug', 1)
 setattr(opt, 'gpu_ids', [0])
 setattr(opt, 'isTrain', 0)
 setattr(opt, 'vis_IN', 0)
-setattr(opt, 'pretrained_path', './checkpoints/' + config_path[:-4])  # './ckpt_Ctrl_PreT/Reweight_G' './checkpoints/CEG_LOLS_VGG1_FT_FewShot'
+setattr(opt, 'pretrained_path', './checkpoints/' + config_path[:-4])
 print('--------args----------')
 for k in list(sorted(vars(opt).keys())):
     print('%s: %s' % (k, vars(opt)[k]))
@@ -50,11 +50,8 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 
 
-# TEST OK
+
 # SIDD EVAL SPATIAL
-
-
-
 img_name = './Spatical_Control_Example/12.png'
 img = io.imread(img_name)
 img = img[:255, :255,:]

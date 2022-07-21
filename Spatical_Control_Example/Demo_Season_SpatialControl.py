@@ -58,7 +58,6 @@ inp_ = get_special_input_lvlImgSize(img, spatial_temp)
 model.pred_special_single(*inp_, onevariable=False, name='S2W_continuous_l2hT', dir='BtoA')
 
 
-# TEST OK
 # W2S_MASKED
 # user-defined strip lvl
 img_name = './Spatical_Control_Example/32_enhlvl_99.png'

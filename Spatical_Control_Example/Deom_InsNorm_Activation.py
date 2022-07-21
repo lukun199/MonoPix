@@ -25,7 +25,7 @@ setattr(opt, 'debug', 1)
 setattr(opt, 'gpu_ids', [0])
 setattr(opt, 'isTrain', 0)
 setattr(opt, 'vis_IN', 1)  # when show vis.
-setattr(opt, 'pretrained_path', './checkpoints/' + config_path[:-4])  # './ckpt_Ctrl_PreT/Reweight_G' './checkpoints/CEG_LOLS_VGG1_FT_FewShot'
+setattr(opt, 'pretrained_path', './checkpoints/' + config_path[:-4])
 print('--------args----------')
 for k in list(sorted(vars(opt).keys())):
     print('%s: %s' % (k, vars(opt)[k]))
@@ -59,12 +59,8 @@ from matplotlib import pyplot as plt
 
 
 def vis_IN_Act_float(arr, name):
-    proto = np.zeros_like(arr[0][1])
     arr = np.maximum(0.2 * arr, arr)
-    # arr[0] = np.where(arr[0] < 0, arr[0], arr[0] * 0.2)
-    #sc = plt.imshow(arr[1].mean(0), cmap=plt.cm.jet)# interpolation="nearest",
-    sc = plt.imshow(np.abs(arr[1].mean(0)), cmap=plt.cm.jet)#  vmin=0.06, vmax=0.13) # [0, 0.1] for WS. [0.16, .0.2] for SW
-    #plt.colorbar()
+    sc = plt.imshow(np.abs(arr[1].mean(0)), cmap=plt.cm.jet)
     plt.axis('off')
     sc.figure.savefig('./visualize_demo/vis_IN_ACT/' + name.split('.')[0] + '_vis_floatACT.png', bbox_inches='tight',pad_inches = 0, dpi=60)
     plt.clf()
