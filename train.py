@@ -90,4 +90,4 @@ for epoch in range(1, opt.niter + opt.niter_decay + 1):  # 201
         model.save(epoch)
 
     if epoch > opt.niter or opt.custom_lr:
-        model.update_learning_rate(epoch)
+        model.update_learning_rate()
