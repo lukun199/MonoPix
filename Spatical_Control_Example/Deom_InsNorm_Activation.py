@@ -18,7 +18,7 @@ for kk, vv in f.items():
 
 # resume
 setattr(opt, 'resume_ckpt', 1)
-setattr(opt, 'which_direction', 'BtoA')
+setattr(opt, 'which_direction', 'AToB')
 setattr(opt, 'batchSize', 8)
 setattr(opt, 'which_epoch', 300)
 setattr(opt, 'debug', 1)
@@ -107,7 +107,7 @@ def vis_IN_Act_count_crossZero(arr, name):
 
 inner_name = './Spatical_Control_Example/54_enhlvl_99.png'
 inp_ = get_special_input_Single(inner_name, device=torch.device("cuda:{}".format(opt.gpu_ids[0])),start=0, end=1.0)
-res, vis = model.pred_special_test(*inp_)
+res, vis = model.pred_special_test(*inp_, dir='AtoB')
 vis_IN_Act_float(vis[[0,-1]].cpu().numpy(), inner_name.split('\\')[-1])
 vis_IN_Act_count(vis[[0,-1]].cpu().numpy(), inner_name.split('\\')[-1])
 vis_IN_Act_count_crossZero(vis[[0,-1]].cpu().numpy(), inner_name.split('\\')[-1])

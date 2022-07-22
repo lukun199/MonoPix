@@ -23,7 +23,7 @@ def run_predict(input_path, gt_path, save_path,
                 os.makedirs(save_folder, exist_ok=True)
 
                 test_img = io.imread(os.path.join(input_path, img_name))
-                if test_img.shape[0]>256:
+                if test_img.shape[0]>256 and 'LOL' not in opt.gt_path:  # we do not resize LOL images
                     test_img = transform.resize(test_img, [256, 256], anti_aliasing=True, preserve_range=True)
                 io.imsave(os.path.join(save_folder, img_name[:-4]) + '_enhlvl_{:02d}.png'.format(99), test_img.astype(np.uint8)) # input
                 test_img = (test_img/ 255. - 0.5) * 2
@@ -63,7 +63,7 @@ def run_predict(input_path, gt_path, save_path,
                 gt_img = io.imread(os.path.join(gt_path, img_name))
                 bs_cnt, lower, higher = 0, lowerb, higherb
                 test_img = io.imread(os.path.join(input_path, img_name))
-                if test_img.shape[0]>256:
+                if test_img.shape[0]>256 and 'LOL' not in opt.gt_path:  # we do not resize LOL images
                     test_img = transform.resize(test_img, [256, 256], anti_aliasing=True, preserve_range=True)
                 io.imsave(os.path.join(save_folder, img_name[:-4]) + '_enhlvl_{:02d}.png'.format(99), test_img) # input
                 test_img = (test_img/ 255. - 0.5) * 2

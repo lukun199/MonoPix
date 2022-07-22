@@ -5,6 +5,7 @@ class TestOptions(BaseOptions):
     def initialize(self):
         BaseOptions.initialize(self)
         self.parser.add_argument('--N_search', type=int, default=7)
+        self.parser.add_argument('--resume_ckpt', type=int, default=1)
         self.parser.add_argument('--lowerb', type=float, default=0., help='lower bound of enhance intensity')
         self.parser.add_argument('--higherb', type=float, default=1., help='higher bound of enhance intensity')
         self.parser.add_argument('--which_epoch', type=str, default='latest', help='which epoch to load')
