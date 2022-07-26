@@ -34,6 +34,6 @@ niter: 100
 niter_decay: 100
 monoidt: 0
 UseNoise: 1
-lambda_res: 1
+lambda_res: 10
 
 

@@ -1,6 +1,6 @@
 # MonoPix - Contrastive Monotonic Pixel-Level Modulation
 
-[ECCV' 2022 Oral].
+[ECCV' 2022 Oral]. ArXiv link: [MainPaper and supplementary material](https://arxiv.org/abs/2207.11517)
 
 **Abstract**
 
@@ -20,7 +20,6 @@ A few representative images. Results produced by MonoPix are shown in the last c
 |W2S: ![](visualize_demo/W2S_1.gif)|D2C: ![](visualize_demo/D2C_1.gif)|
 
 
-**This repository is still under construction. arXiv version will be updated soon.**
 
 ### Requirements
 
